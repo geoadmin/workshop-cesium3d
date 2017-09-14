@@ -50,6 +50,12 @@
     });
   };
 
+  var getCesiumTileset = function() {
+    return new Cesium.Cesium3DTileset({
+      url: 'https://vectortiles.geo.admin.ch/ch.swisstopo.swisstlm3d.3d/20161217/tileset.json'
+    });
+  };
+
   var init = function() {
     var viewer = new Cesium.Viewer('cesiumContainer', {
         // Disable default base layer picker
@@ -85,6 +91,8 @@
     viewer.scene.fog.enabled = true;
     viewer.scene.fog.density = 0.0001;
     viewer.scene.fog.screenSpaceErrorFactor = 25;
+    // Add buildings
+    viewer.scene.primitives.add(getCesiumTileset());
     return viewer;
   };
 
