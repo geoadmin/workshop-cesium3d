@@ -42,6 +42,11 @@
     });
     viewer.scene.globe.baseColor = Cesium.Color.WHITE;
     viewer.scene.backgroundColor = Cesium.Color.WHITE;
+    // Tune the fog
+    // https://cesiumjs.org/Cesium/Build/Documentation/Fog.html
+    viewer.scene.fog.enabled = true;
+    viewer.scene.fog.density = 0.0001;
+    viewer.scene.fog.screenSpaceErrorFactor = 25;
     return viewer;
   };
 
