@@ -21,8 +21,19 @@
         navigationInstructionsInitiallyVisible: false,
         navigationHelpButton: false,
         scene3DOnly: true,
-        terrainProvider : new Cesium.CesiumTerrainProvider({
-          url : 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles'
+        terrainProvider: new Cesium.CesiumTerrainProvider({
+          url: '//3d.geo.admin.ch/1.0.0/ch.swisstopo.terrain.3d/default/20160115/4326/',
+          rectangle: rectangle
+        }),
+        imageryProvider: new Cesium.UrlTemplateImageryProvider({
+          url: "//wmts20.geo.admin.ch/1.0.0/ch.swisstopo.swissimage-product/default/current/4326/{z}/{x}/{y}.jpeg",
+          minimumRetrievingLevel: 8,
+          maximumLevel: 17,
+          tilingScheme: new Cesium.GeographicTilingScheme({
+            numberOfLevelZeroTilesX: 2,
+            numberOfLevelZeroTilesY: 1
+          }),
+          rectangle: rectangle
         })
     });
     // Zoom on swiss
