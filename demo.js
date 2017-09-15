@@ -56,6 +56,22 @@
     });
   };
 
+  // See all camera settings
+  // https://cesiumjs.org/Cesium/Build/Documentation/Camera.html
+  var initCameraOnMoveEnd = function(v) {
+    v.camera.moveEnd.addEventListener(function() {
+      // ECEF coordinates
+      var pos = v.camera.position;
+      // Orientation parameters
+      var heading = v.camera.heading;
+      var pitch = v.camera.pitch;
+      var roll = v.camera.roll;
+      var txt =  'pos: ' + pos.x + ', ' + pos.y + ', ' + pos.z;
+      txt += ' <br>heading: ' + heading + '<br>pitch: ' + pitch + '<br>roll: ' + roll;
+      $('#positionControl').html(txt);
+    });
+  };
+
   var init = function() {
     var viewer = new Cesium.Viewer('cesiumContainer', {
         // Disable default base layer picker
@@ -100,5 +116,6 @@
   window.onload = function() {
     var v = init();
     initSelectBox(v);
+    initCameraOnMoveEnd(v);
   };
 })();
