@@ -62,13 +62,27 @@
     v.camera.moveEnd.addEventListener(function() {
       // ECEF coordinates
       var pos = v.camera.position;
-      // Orientation parameters
+      // Orientation parameters in radians
       var heading = v.camera.heading;
       var pitch = v.camera.pitch;
       var roll = v.camera.roll;
       var txt =  'pos: ' + pos.x + ', ' + pos.y + ', ' + pos.z;
       txt += ' <br>heading: ' + heading + '<br>pitch: ' + pitch + '<br>roll: ' + roll;
       $('#positionControl').html(txt);
+    });
+  };
+
+  var initFlyToBtn = function(v) {
+    $('#flyToPosition').on('click', function() {
+      // https://cesiumjs.org/Cesium/Build/Documentation/Camera.html#flyTo
+      v.camera.flyTo({
+        destination: new Cesium.Cartesian3(4333643.393905449, 513547.4508890798, 4639144.286780434),
+        orientation: {
+          heading: 4.52996251903466,
+          pitch: -0.49412275759546054,
+          roll: 6.279463826952917
+        }
+      });
     });
   };
 
@@ -117,5 +131,6 @@
     var v = init();
     initSelectBox(v);
     initCameraOnMoveEnd(v);
+    initFlyToBtn(v);
   };
 })();
