@@ -86,6 +86,20 @@
     });
   };
 
+  // https://cesiumjs.org/Cesium/Build/Documentation/DataSource.html?classFilter=dataSource
+  // https://cesiumjs.org/Cesium/Build/Documentation/KmlDataSource.html?classFilter=KmlDataSource
+  var initKml = function(v) {
+    var kmlUrl = 'https://gist.githubusercontent.com/davidoesch/' +
+        'b4b7adb4736ca92e630881c69af33ef0/raw/' +
+        '6df9ae2b5e0d1bf57de4f1939b9e67dc961bd299/direttisma_kmltest.kml';
+    Cesium.KmlDataSource.load(kmlUrl, {
+      camera: v.scene.camera,
+      canvas: v.scene.canvas
+    }).then(function(data) {
+      v.dataSources.add(data);
+    });
+  };
+
   var init = function() {
     var viewer = new Cesium.Viewer('cesiumContainer', {
         // Disable default base layer picker
@@ -98,6 +112,8 @@
         sceneModePicker: false,
         // Disable selection indicator
         selectionIndicator: false,
+        // Disable infoBox
+        infoBox: false,
         timeline: false,
         animation: false,
         geocoder: false,
@@ -123,6 +139,8 @@
     viewer.scene.fog.screenSpaceErrorFactor = 25;
     // Add buildings
     viewer.scene.primitives.add(getCesiumTileset());
+    // Disable time animation
+    viewer.clock.shouldAnimate = false;
     return viewer;
   };
 
@@ -132,5 +150,6 @@
     initSelectBox(v);
     initCameraOnMoveEnd(v);
     initFlyToBtn(v);
+    initKml(v);
   };
 })();
