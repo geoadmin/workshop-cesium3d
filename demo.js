@@ -100,6 +100,17 @@
     });
   };
 
+  // https://cesiumjs.org/Cesium/Build/Documentation/Entity.html?classFilter=Entit
+  var addPolyline = function(v) {
+    v.entities.add({
+      polyline : {
+        positions : Cesium.Cartesian3.fromDegreesArray([6.43779, 46.44474,
+                                                        6.98927, 46.48335]),
+        width : 5,
+        material : Cesium.Color.RED
+    }});
+  };
+
   var init = function() {
     var viewer = new Cesium.Viewer('cesiumContainer', {
         // Disable default base layer picker
@@ -151,5 +162,6 @@
     initCameraOnMoveEnd(v);
     initFlyToBtn(v);
     initKml(v);
+    addPolyline(v);
   };
 })();
